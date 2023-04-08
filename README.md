@@ -1,0 +1,3 @@
+# Auto-affiliate-link-in-post-image
+To use this code, create a new PHP file in the "wp-content/plugins" directory and copy and paste the code into the file. Save the file and activate the plugin in the WordPress admin area. Then go to the plugin settings page to enter your affiliate link. Enjoy
+To use this code, create a new PHP file in the "wp-content/plugins" directory and copy and paste the code into the file. Save the file and activate the plugin in the WordPress admin area. Then go to the plugin settings page to enter your affiliate link. The plugin will automatically add the affiliate link to all post images in the content.
