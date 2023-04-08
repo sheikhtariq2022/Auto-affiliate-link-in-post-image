@@ -1,0 +1,55 @@
+<?php
+/*
+Plugin Name: Auto Affiliate Links for Post Images
+Plugin URI: https://example.com/auto-affiliate-links-for-post-images
+Description: Automatically add affiliate links to post images.
+Version: 1.0
+Author: Your Name
+Author URI: https://example.com/
+*/
+
+// Enqueue plugin scripts and styles
+function auto_affiliate_links_enqueue_scripts() {
+    wp_enqueue_style('auto-affiliate-links-style', plugins_url('/style.css', __FILE__));
+}
+add_action('wp_enqueue_scripts', 'auto_affiliate_links_enqueue_scripts');
+
+// Add plugin settings page
+function auto_affiliate_links_add_settings_page() {
+    add_options_page('Auto Affiliate Links Settings', 'Auto Affiliate Links', 'manage_options', 'auto-affiliate-links', 'auto_affiliate_links_settings_page');
+}
+add_action('admin_menu', 'auto_affiliate_links_add_settings_page');
+
+// Settings page markup
+function auto_affiliate_links_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>Auto Affiliate Links Settings</h1>
+        <form method="post" action="options.php">
+            <?php settings_fields('auto-affiliate-links-settings-group'); ?>
+            <?php do_settings_sections('auto-affiliate-links-settings-group'); ?>
+            <table class="form-table">
+                <tr valign="top">
+                    <th scope="row">Affiliate Link</th>
+                    <td><input type="text" name="auto_affiliate_links_affiliate_link" value="<?php echo esc_attr(get_option('auto_affiliate_links_affiliate_link')); ?>" /></td>
+                </tr>
+            </table>
+            <?php submit_button(); ?>
+        </form>
+    </div>
+    <?php
+}
+
+// Register plugin settings
+function auto_affiliate_links_register_settings() {
+    register_setting('auto-affiliate-links-settings-group', 'auto_affiliate_links_affiliate_link');
+}
+add_action('admin_init', 'auto_affiliate_links_register_settings');
+
+// Add affiliate link to post images
+function auto_affiliate_links_add_affiliate_link_to_images($content) {
+    $affiliate_link = get_option('auto_affiliate_links_affiliate_link');
+    $new_content = preg_replace('/<img (.*?)src="(.*?)"(.*?)>/i', '<a href="' . $affiliate_link . '"><img $1src="$2"$3></a>', $content);
+    return $new_content;
+}
+add_filter('the_content', 'auto_affiliate_links_add_affiliate_link_to_images');
