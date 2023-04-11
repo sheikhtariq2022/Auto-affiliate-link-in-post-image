@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Auto Affiliate Links for Post Images
-Plugin URI: https://example.com/auto-affiliate-links-for-post-images
+Plugin URI: https://github.com/sheikhtariq2022/Auto-affiliate-link-in-post-image
 Description: Automatically add affiliate links to post images.
 Version: 1.0
-Author: Your Name
-Author URI: https://example.com/
+Author: Sheikhtariq
+Author URI: http://tariqulislam.online/
 */
 
 // Enqueue plugin scripts and styles
